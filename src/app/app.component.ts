@@ -1,8 +1,5 @@
 import {
-  AfterViewInit,
   Component,
-  OnDestroy,
-  OnInit,
   ViewChild,
 } from '@angular/core';
 import { CSVRecord } from './model/CSVRecord';
@@ -26,8 +23,6 @@ export class AppComponent {
     'position',
     'mobile',
   ];
-
-
 
   public records: any[] = [];
 
@@ -53,7 +48,7 @@ export class AppComponent {
       };
 
       reader.onerror = function () {
-        console.log('error is occured while reading file!');
+        console.log('Error is occured while reading file!');
       };
     } else {
       alert('Please import valid .csv file.');
@@ -62,22 +57,22 @@ export class AppComponent {
   }
 
   getDataRecordsArrayFromCSVFile(csvRecordsArray: any, headerLength: any) {
-    let csvArr = [];
+    let csvCollection = [];
 
     for (let i = 1; i < csvRecordsArray.length; i++) {
-      let curruntRecord = (<string>csvRecordsArray[i]).split(',');
-      if (curruntRecord.length == headerLength) {
+      let currentRecord = (<string>csvRecordsArray[i]).split(',');
+      if (currentRecord.length == headerLength) {
         let csvRecord: CSVRecord = new CSVRecord();
-        csvRecord.id = curruntRecord[0].trim();
-        csvRecord.firstName = curruntRecord[1].trim();
-        csvRecord.lastName = curruntRecord[2].trim();
-        csvRecord.age = curruntRecord[3].trim();
-        csvRecord.position = curruntRecord[4].trim();
-        csvRecord.mobile = curruntRecord[5].trim();
-        csvArr.push(csvRecord);
+        csvRecord.id = currentRecord[0].trim();
+        csvRecord.firstName = currentRecord[1].trim();
+        csvRecord.lastName = currentRecord[2].trim();
+        csvRecord.age = currentRecord[3].trim();
+        csvRecord.position = currentRecord[4].trim();
+        csvRecord.mobile = currentRecord[5].trim();
+        csvCollection.push(csvRecord);
       }
     }
-    return csvArr;
+    return csvCollection;
   }
 
   isValidCSVFile(file: any) {
